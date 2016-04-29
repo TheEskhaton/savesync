@@ -2,10 +2,8 @@
 
 namespace Bananasync.Core.Models
 {
-    public class Game
+    public class Game : BaseEntity
     {
-        public int Id { get; set; }
-
         /// <summary>
         /// Title of the game e.g. "Minecraft"
         /// </summary>
