@@ -6,7 +6,6 @@ using Bananasync.Core.Models;
 using System.Data.SQLite;
 using System.Reflection;
 using Dapper;
-using Bananasync.Core.Misc;
 using DapperExtensions;
 
 namespace Bananasync.Core.Repositorys
@@ -17,17 +16,6 @@ namespace Bananasync.Core.Repositorys
 
         public Repository()
         {
-            try
-            {
-                var table = typeof(T).GetCustomAttributes().ToList().FirstOrDefault(x => x.GetType() == typeof(Table)) as Table;
-
-                if (table !=null)
-                    _tablename = table.Tablename;
-            }
-            catch (NullReferenceException)
-            {
-                throw new CustomAttributeFormatException("");
-            }
         }
 
         public T FindById(int id)
