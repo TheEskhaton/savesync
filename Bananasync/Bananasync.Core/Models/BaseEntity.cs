@@ -9,5 +9,6 @@ namespace Bananasync.Core.Models
     public abstract class BaseEntity
     {
         public int Id { get; protected set; }
+        public string Tablename { get; protected set; }
     }
 }

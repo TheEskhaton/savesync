@@ -9,7 +9,7 @@ namespace Bananasync.Core.Repositorys
     {
         T FindById(int id);
         IEnumerable<T> List();
-        IEnumerable<T> List(Expression<Func<T, bool>> predicate);
+        IEnumerable<T> List(Func<T, bool> predicate);
 
         void Add(T entity);
         void Delete(T entity);
