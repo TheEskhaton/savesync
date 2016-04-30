@@ -1,4 +1,4 @@
-# Bananasync
+![Logo](http://imagr.eu/up/ygcVg_logo_small.png)
 
 ## What´s this project again?
 Bananasync synchronizes the savegames of every game you could possibly own to the cloud of your choice!
