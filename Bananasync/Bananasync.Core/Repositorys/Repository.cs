@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Bananasync.Core.Models;
 using System.Data.SQLite;
 using System.Reflection;
 using Dapper;
 using Bananasync.Core.Misc;
+using DapperExtensions;
 
 namespace Bananasync.Core.Repositorys
 {
     public class Repository<T> : IBaseRepository<T> where T : BaseEntity
     {
         private readonly SQLiteConnection _connection;
-        private readonly string _tablename;
 
         public Repository()
         {
@@ -31,32 +32,38 @@ namespace Bananasync.Core.Repositorys
 
         public T FindById(int id)
         {
-            return _connection.Query<T>($"SELECT * FROM {_tablename}").First();
+            return _connection.Get<T>(id);
         }
 
         public IEnumerable<T> List()
         {
-            return _connection.Query<T>($"SELECT * FROM {_tablename}");
+            return _connection.GetList<T>();
         }
 
         public IEnumerable<T> List(Func<T, bool> predicate)
         {
-            return List().Where(predicate);
+            return _connection.GetList<T>(predicate);
         }
 
-        public void Add(T entity)
+        public bool Add(T entity)
         {
-            _connection.I
+            return _connection.Insert(entity);
         }
 
-        public void Delete(T entity)
+        public bool Delete(T entity)
         {
-            throw new NotImplementedException();
+            return _connection.Delete(entity);
         }
 
-        public void Update(T entity)
+        public bool Update(T entity)
         {
-            throw new NotImplementedException();
+            // Casting because of naming conflicts between SQLite and DapperExtensions
+            return (_connection as IDbConnection).Update(entity);
+        }
+
+        public int GetCount(Func<T, bool> predicate)
+        {
+            return _connection.Count<T>(predicate);
         }
     }
 }

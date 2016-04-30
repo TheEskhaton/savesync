@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using Bananasync.Core.Misc;
-
-namespace Bananasync.Core.Models
+﻿namespace Bananasync.Core.Models
 {
-    [Table("Games")]
     public class Game : BaseEntity
     {
         /// <summary>

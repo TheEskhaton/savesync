@@ -11,8 +11,9 @@ namespace Bananasync.Core.Repositorys
         IEnumerable<T> List();
         IEnumerable<T> List(Func<T, bool> predicate);
 
-        void Add(T entity);
-        void Delete(T entity);
-        void Update(T entity);
+        bool Add(T entity);
+        bool Delete(T entity);
+        bool Update(T entity);
+        int GetCount(Func<T, bool> predicate);
     }
 }
