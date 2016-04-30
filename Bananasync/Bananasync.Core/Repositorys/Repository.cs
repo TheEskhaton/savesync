@@ -7,15 +7,20 @@ using System.Data.SQLite;
 using System.Reflection;
 using Dapper;
 using DapperExtensions;
+using Ninject;
 
 namespace Bananasync.Core.Repositorys
 {
     public class Repository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private readonly SQLiteConnection _connection;
+        private readonly IDbConnection _connection;
 
         public Repository()
         {
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+            _connection = kernel.Get<IDbConnection>();
+
         }
 
         public T FindById(int id)
